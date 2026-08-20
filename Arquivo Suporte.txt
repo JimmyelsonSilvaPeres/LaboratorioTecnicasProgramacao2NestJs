@@ -1,6 +1,12 @@
 criar nova controler
 nest g controller usuario --no-spec
 
+criar service
+nest generate service usuarios --no-spec
+
+events
+npm install @nestjs/event-emitter
+
 rodar o projeto
 npm run start:dev
 
