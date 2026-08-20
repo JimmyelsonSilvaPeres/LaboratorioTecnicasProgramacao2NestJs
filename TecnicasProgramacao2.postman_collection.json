@@ -1,0 +1,185 @@
+{
+  "info": {
+    "_postman_id": "807eb0fc-2f6d-4a0f-b9c1-94f54b7577e2",
+    "name": "TecnicasProgramacao2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "10849736"
+  },
+  "item": [
+    {
+      "name": "http://localhost:3000/sistema/usuarios",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/sistema/usuarios",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "sistema",
+            "usuarios"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "novo usuario",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nombre\": \"Carlos\",\r\n  \"apellido\": \"Silva\",\r\n  \"email\": \"carlos.silva@example.com\",\r\n  \"telefone\": \"11987654321\",\r\n  \"totalCreditos\": 2500\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/sistema/usuarios",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "sistema",
+            "usuarios"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Relatorio Creditos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/sistema/relatorio-creditos/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "sistema",
+            "relatorio-creditos",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Relatorio Usuarios",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/sistema/relatorio-usuarios/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "sistema",
+            "relatorio-usuarios",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Adicionar Credito",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"creditos\":100\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/sistema/usuarios-add-credito/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "sistema",
+            "usuarios-add-credito",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Remover Credito",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"creditos\":100\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/sistema/usuarios-remove-credito/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "sistema",
+            "usuarios-remove-credito",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
