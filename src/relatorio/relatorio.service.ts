@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { EmailService } from 'src/email/email.service';
+import { NotificacaoService } from 'src/notificacao/notificacao.service';
 import { Usuario, UsuarioService } from 'src/usuario/usuario.service';
 
 @Injectable()
 export class RelatorioService {
   constructor(
-    private readonly emailService: EmailService,
+    private readonly notificacaoService: NotificacaoService,
     private readonly usuarioService: UsuarioService,
   ) {}
   public gerarRelatorioCreditos(
@@ -16,10 +16,7 @@ export class RelatorioService {
     if (!usuario) {
       return { error: 'Usuario no encontrado' };
     }
-    this.emailService.notificarPorEmailUsuario(
-      usuario,
-      'Relatório de créditos gerado',
-    );
+    this.notificacaoService.notificar(usuario, 'Relatório de créditos gerado');
     return {
       totalUsuarios: usuarios ? usuarios.length : 0,
       totalCreditos: usuarios
@@ -33,7 +30,7 @@ export class RelatorioService {
     if (!usuario) {
       return { error: 'Usuario no encontrado' };
     }
-    this.emailService.notificarPorEmailUsuario(
+    this.notificacaoService.notificar(
       usuario,
       'Relatório de créditos solicitado',
     );
@@ -45,6 +42,7 @@ export class RelatorioService {
           email: usuario.email,
           telefone: usuario.telefone,
           totalCreditos: usuario.totalCreditos,
+          tiposNotificacao: usuario.tiposNotificacao,
         }))
       : [];
 

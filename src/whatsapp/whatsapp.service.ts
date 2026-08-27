@@ -3,10 +3,10 @@ import { Notificacao } from 'src/interfaces/notificacao';
 import { Usuario } from 'src/usuario/usuario.service';
 
 @Injectable()
-export class EmailService implements Notificacao {
+export class WhatsappService implements Notificacao {
   public notificar(usuario: Usuario, msg: string) {
     console.log(
-      `Notificar por email: ${usuario.nombre} ${usuario.apellido} - ${msg}`,
+      `Notificar por whatsapp: ${usuario.nombre} ${usuario.apellido} - ${msg}`,
     );
   }
 }
