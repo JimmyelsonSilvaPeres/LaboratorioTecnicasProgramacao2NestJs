@@ -3,49 +3,28 @@ import { Usuario, UsuarioService } from './usuario.service';
 
 @Controller()
 export class UsuarioController {
-  constructor() {}
+  constructor(private readonly usuarioService: UsuarioService) {}
 
   @Get('usuarios')
   getUsuarios() {
-    const usuarioService = new UsuarioService();
-    return usuarioService.getUsuarios();
+    return this.usuarioService.getUsuarios();
   }
   @Post('usuarios')
   createUsuario(@Body() usuario: Usuario) {
-    const usuarioService = new UsuarioService();
-    return usuarioService.addUsuario(usuario);
+    return this.usuarioService.addUsuario(usuario);
   }
   @Post('usuarios-add-credito/:id')
   addCredito(
     @Param('id') id: number,
     @Body() { creditos }: { creditos: number },
   ) {
-    const usuarioService = new UsuarioService();
-    const usuario = usuarioService.getUsuario(id);
-    if (!usuario) {
-      return { error: 'Usuario no encontrado' };
-    }
-    usuario.totalCreditos += creditos;
-    this.notificarPorEmailUsuario(usuario, `Créditos adicionados: ${creditos}`);
-    return usuario;
+    return this.usuarioService.addCredito(id, creditos);
   }
   @Post('usuarios-remove-credito/:id')
   removeCredito(
     @Param('id') id: number,
     @Body() { creditos }: { creditos: number },
   ) {
-    const usuarioService = new UsuarioService();
-    const usuario = usuarioService.getUsuario(id);
-    if (!usuario) {
-      return { error: 'Usuario no encontrado' };
-    }
-    usuario.totalCreditos -= creditos;
-    this.notificarPorEmailUsuario(usuario, `Créditos removidos: ${creditos}`);
-    return usuario;
-  }
-  private notificarPorEmailUsuario(usuario: Usuario, msg: string) {
-    console.log(
-      `Notificar por email: ${usuario.nombre} ${usuario.apellido} - ${msg}`,
-    );
+    return this.usuarioService.RemoveCredito(id, creditos);
   }
 }

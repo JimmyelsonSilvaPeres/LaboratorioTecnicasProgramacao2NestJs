@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { EmailService } from 'src/email/email.service';
 const usuarios: Usuario[] = [
   {
     id: 1,
@@ -12,8 +13,33 @@ const usuarios: Usuario[] = [
 
 @Injectable()
 export class UsuarioService {
+  RemoveCredito(id: number, creditos: number) {
+    const usuario = this.getUsuario(id);
+    if (!usuario) {
+      return { error: 'Usuario no encontrado' };
+    }
+    usuario.totalCreditos -= creditos;
+    this.emailService.notificarPorEmailUsuario(
+      usuario,
+      `Créditos adicionados: ${creditos}`,
+    );
+    return usuario;
+  }
+  constructor(private readonly emailService: EmailService) {}
+  addCredito(id: number, creditos: number) {
+    const usuario = this.getUsuario(id);
+    if (!usuario) {
+      return { error: 'Usuario no encontrado' };
+    }
+    usuario.totalCreditos += creditos;
+    this.emailService.notificarPorEmailUsuario(
+      usuario,
+      `Créditos adicionados: ${creditos}`,
+    );
+    return usuario;
+  }
   getUsuario(id: number): Usuario | undefined {
-    return usuarios.find((u) => u.id === id);
+    return usuarios.find((u) => u.id == id);
   }
   getUsuarios(): Usuario[] {
     return usuarios;
