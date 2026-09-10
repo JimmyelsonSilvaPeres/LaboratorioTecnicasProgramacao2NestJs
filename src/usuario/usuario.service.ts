@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { NotificacaoFactoryService } from 'src/notificacao-factory/notificacao-factory.service';
 import { NotificacaoService } from 'src/notificacao/notificacao.service';
 const usuarios: Usuario[] = [
   {
@@ -14,17 +15,19 @@ const usuarios: Usuario[] = [
 
 @Injectable()
 export class UsuarioService {
-  constructor(private readonly notificacaoService: NotificacaoService) {}
+  constructor(
+    private readonly notificacaoService: NotificacaoService,
+    private readonly notificacaoFactoryService: NotificacaoFactoryService,
+  ) {}
   RemoveCredito(id: number, creditos: number) {
     const usuario = this.getUsuario(id);
     if (!usuario) {
       return { error: 'Usuario no encontrado' };
     }
     usuario.totalCreditos -= creditos;
-    this.notificacaoService.notificar(
-      usuario,
-      `Créditos adicionados: ${creditos}`,
-    );
+    const notificador =
+      this.notificacaoFactoryService.getNotificador('telegram');
+    notificador.notificar(usuario, `Créditos adicionados: ${creditos}`);
     return usuario;
   }
   addCredito(id: number, creditos: number) {
